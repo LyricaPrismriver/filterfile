@@ -49,7 +49,9 @@ def copyfiles(dirlist, filelist, dest):
        print('done: %s' % destfile)
 
 t.setStart()
-#筛选文件,复杂筛选算法需对文件和目录列表进行操作
-copyfiles([x for x in all_dirs if '.svn' not in x], [x for x in all_files if '.svn' not in x], DEST)
+#筛选文件,筛选时对all_files和all_folder进行操作,这两都是一维列表
+filtered_dirs = [x for x in all_dirs if '.svn' not in x]
+filtered_files = [x for x in all_files if '.svn' not in x]
+copyfiles(filtered_dirs, filtered_files, DEST)
 f.write('copy all folders and files from %s to %s uses %.4f s%s' % (SRC, DEST, t.getSec(), LINESEP)
 f.close()
